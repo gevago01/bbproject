@@ -5,7 +5,7 @@ import time
 import re
 
 
-fileName = "benchmarkSameChunk.txt"
+fileName = "experiments/benchmarkSameChunk.txt"
 container = "https://object.cscs.ch/v1/AUTH_61499a61052f419abad475045aaf88f9/bigbrain"
 nofRetrievals = 100
 
@@ -58,7 +58,6 @@ def main():
         f.write("#%s\n" % datetime.now())
         for retTime in times:
             f.write("%s\n" % retTime)
-    print(times)
 
 
 if __name__ == '__main__':
