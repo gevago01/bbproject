@@ -1,11 +1,12 @@
 import requests
 import random
 import time
-import numpy as np
-import matplotlib.pyplot as plt
+import re
 
+
+fileName = "sameChunkBenchmark.txt"
 container = "https://object.cscs.ch/v1/AUTH_61499a61052f419abad475045aaf88f9/bigbrain"
-nofRetrievals = 20
+nofRetrievals = 10
 
 
 def getAllObjects():
@@ -14,28 +15,22 @@ def getAllObjects():
 
 
 def getObject(object):
-    requests.get(container+"/"+object, params=None)
+    requests.get(container + "/" + object, params=None)
 
 
-def plotTime(timeMean, timesStd):
-    # Build the plot
-    fig, ax = plt.subplots()
-    barLabels = ['']
-    x_pos = np.arange(len(barLabels))
-    CTEs = [timeMean]
-    error = [timesStd]
-    ax.bar(x_pos, CTEs, yerr=error, align='center', alpha=0.5, ecolor='black', capsize=10)
-    # ax.set_ylabel('')
-    ax.set_ylabel('Average Retrieval Time (seconds)')
-    ax.set_xticks(x_pos)
-    ax.set_xticklabels(barLabels)
-    ax.set_title('Average Retrieval Time for Same 64x64x64 Chunk')
-    ax.yaxis.grid(True)
+"""checks if dimensions of object are 64x64x64
+    if not, a random object is selected anew
+"""
+def validObject(randomObject):
+    # remove the name
+    objectWoName = re.sub(r'.*/', '', randomObject)
+    dimensions = objectWoName.split("_")
+    for dim_i in dimensions:
+        intervals = dim_i.split("-");
+        if (int(intervals[1]) - int(intervals[0])) != 64:
+            return False
 
-    # Save the figure and show
-    plt.tight_layout()
-    plt.savefig('bar_plot_with_error_bars.png')
-    plt.show()
+    return True
 
 
 def main():
@@ -46,19 +41,22 @@ def main():
     randomObject = random.choice(allObjects)
     print(randomObject)
 
+    while not validObject(randomObject):
+        randomObject = random.choice(allObjects)
+
+    print(randomObject)
+
     times = []
     for i in range(0, nofRetrievals):
         start = time.time()
         getObject(randomObject)
         end = time.time()
-        times.append(end-start)
+        times.append(end - start)
 
-
-    timeMean = np.mean(times)
-    timesStd = np.std(times)
-    plotTime(timeMean, timesStd)
-
-
+    with open(fileName, 'a') as f:
+        for retTime in times:
+            f.write("%s\n" % retTime)
+    print(times)
 
 
 if __name__ == '__main__':
