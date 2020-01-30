@@ -1,12 +1,13 @@
+from datetime import datetime
 import requests
 import random
 import time
 import re
 
 
-fileName = "sameChunkBenchmark.txt"
+fileName = "benchmarkSameChunk.txt"
 container = "https://object.cscs.ch/v1/AUTH_61499a61052f419abad475045aaf88f9/bigbrain"
-nofRetrievals = 10
+nofRetrievals = 100
 
 
 def getAllObjects():
@@ -54,6 +55,7 @@ def main():
         times.append(end - start)
 
     with open(fileName, 'a') as f:
+        f.write("#%s\n" % datetime.now())
         for retTime in times:
             f.write("%s\n" % retTime)
     print(times)
