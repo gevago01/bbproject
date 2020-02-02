@@ -3,8 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-
-def plotTime(times):
+def plotTime(times, input_file):
     timeMean = np.mean(times)
     timesStd = np.std(times)
     # Build the plot
@@ -23,20 +22,23 @@ def plotTime(times):
 
     # Save the figure and show
     plt.tight_layout()
-    plt.savefig('bar_plot_with_error_bars.png')
+
+    output_file = input_file.split("/")[1]
+    plt.savefig('plots/' + output_file + '.png')
     plt.show()
 
 
-
 def main():
-
     fileName = sys.argv[1]
+    timeMesaurements = []
     with open(fileName) as f:
-        timeMesaurements = f.readlines()
+        for l in f:
+            if not l.startswith("#"):
+                timeMesaurements.append(l)
 
     timesM = np.array(timeMesaurements).astype(np.double)
 
-    plotTime(timesM)
+    plotTime(timesM, sys.argv[1])
 
 
 if __name__ == '__main__':
