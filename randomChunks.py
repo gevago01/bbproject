@@ -5,7 +5,7 @@ import time
 import re
 
 
-fileName = "experiments/benchmarkSameChunk.txt"
+fileName = "experiments/benchmarkRandomChunks.txt"
 container = "https://object.cscs.ch/v1/AUTH_61499a61052f419abad475045aaf88f9/bigbrain"
 nofRetrievals = 100
 
@@ -34,11 +34,7 @@ def validObject(randomObject):
     return True
 
 
-def main():
-    print("running..")
-
-    allObjects = getAllObjects()
-
+def getRanObject(allObjects):
     randomObject = random.choice(allObjects)
     print(randomObject)
 
@@ -47,8 +43,17 @@ def main():
 
     print(randomObject)
 
+    return randomObject
+
+
+def main():
+    print("running..")
+
+    allObjects = getAllObjects()
+
     times = []
     for i in range(0, nofRetrievals):
+        randomObject = getRanObject(allObjects)
         start = time.time()
         requestObject(randomObject)
         end = time.time()
