@@ -33,7 +33,6 @@ def validObject(randomObject):
 
     return True
 
-
 def getRanObject(allObjects):
     randomObject = random.choice(allObjects)
     print(randomObject)
