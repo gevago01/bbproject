@@ -35,12 +35,9 @@ def validObject(randomObject):
 
 def getRanObject(allObjects):
     randomObject = random.choice(allObjects)
-    print(randomObject)
 
     while not validObject(randomObject):
         randomObject = random.choice(allObjects)
-
-    print(randomObject)
 
     return randomObject
 
