@@ -2,7 +2,7 @@
 
 ## First Benchmark - Requesting same chunk 64x64x64 repeatedly
 
-100 Mesaurements were taken on the following dates/times:
+100 Mesaurements were taken on each of the following dates/times:
 + 2020-01-30 11:20:34.381382
 + 2020-01-30 13:20:43.193917
 + 2020-01-30 16:44:13.580841
