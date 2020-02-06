@@ -19,7 +19,7 @@ The plot was created using plots.py, which calculates the mean and the error ove
 
 ## Second Benchmark - Requesting random 64x64x64 chunks
 
-100 Mesaurements were taken on each of the following dates/times:
+100 Random objects requested on each of the following dates/times:
 
 + 2020-02-04 11:55:22.752434
 + 2020-02-04 14:02:38.206192
@@ -31,3 +31,5 @@ The plot was created using plots.py, which calculates the mean and the error ove
 + 2020-02-05 22:02:05.804817
 + 2020-02-06 00:02:11.517283
 + 2020-02-06 02:02:16.854936
+
+The mean and the error are calculated over all mesaurements (see [plots.py](https://github.com/gevago01/bbproject/blob/master/plots.py)) 
