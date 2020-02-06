@@ -14,10 +14,11 @@ def plotTime(times, input_file):
     error = [timesStd]
     ax.bar(x_pos, avgTime, yerr=error, align='center', alpha=0.5, ecolor='black', capsize=10)
     # ax.set_ylabel('')
+    ax.margins(0.1, 0.1)
     ax.set_ylabel('Average Retrieval Time (seconds)')
     ax.set_xticks(x_pos)
     ax.set_xticklabels(barLabels)
-    ax.set_title('Average Retrieval Time for Same 64x64x64 Chunk')
+    ax.set_title('Average Retrieval Time for Random 64x64x64 Chunks')
     ax.yaxis.grid(True)
 
     # Save the figure and show
