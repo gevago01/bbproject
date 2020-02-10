@@ -18,7 +18,7 @@ def plotTime(times, input_file):
     ax.set_ylabel('Average Retrieval Time (seconds)')
     ax.set_xticks(x_pos)
     ax.set_xticklabels(barLabels)
-    ax.set_title('Average Retrieval Time for Random 64x64x64 Chunks')
+    ax.set_title('Average Retrieval Time for Partial Plane 64x64x64 Chunks')
     ax.yaxis.grid(True)
 
     # Save the figure and show
