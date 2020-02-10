@@ -33,3 +33,45 @@ The plot was created using plots.py, which calculates the mean and the error ove
 + 2020-02-06 02:02:16.854936
 
 The mean and the error are calculated over all mesaurements (see [plots.py](https://github.com/gevago01/bbproject/blob/master/plots.py)) 
+
+## Third Benchmark - Requesting partial plane
+
+In this benchmark we fix the x coordinate and iterate Y and Z to 1/4th of the full volume's range
+ 
+Partial Planes requested:
+
+1. 20um/0-64_3392-3456_448-512
+1. ('partial_plane_points:', 528)
+
+20um/0-64_4736-4800_3328-3392
+('partial_plane_points:', 528)
+
+20um/0-64_6592-6656_3264-3328
+('partial_plane_points:', 528)
+
+20um/0-64_384-448_704-768
+('partial_plane_points:', 528)
+
+20um/0-64_384-448_2496-2560
+('partial_plane_points:', 528)
+
+20um/0-64_1152-1216_2240-2304
+('partial_plane_points:', 528)
+
+20um/0-64_3072-3136_1472-1536
+('partial_plane_points:', 528)
+
+
+20um/0-64_3648-3712_1408-1472
+('partial_plane_points:', 528)
+
+20um/0-64_4544-4608_4096-4160
+('partial_plane_points:', 528)
+
+
+20um/0-64_1024-1088_0-64
+('partial_plane_points:', 528)
+
+20um/0-64_3520-3584_5568-5632
+('partial_plane_points:', 528)
+
