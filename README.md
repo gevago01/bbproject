@@ -10,6 +10,20 @@ Benchmarks implemented:
 + Requesting random 64x64x64 chunks. This benchmark requests 100 random chunks and calculate the average request time per chunk.
 + Requesting partial plane. This benchmark defines a plane by fixing the x-coordinate and the the other two dimensions to be 1/4 of the full volume. The bencharm then requests chunks from within the plane.
 
+## Benchmark Execution
+
+The benchmarks are ran using the [run.sh](https://github.com/gevago01/bbproject/blob/master/multiple_threads_one_session/run.sh). All three benchmarks are ran every 3 hours. 
+
+## Execution Environment
+
+We run the benchmarks on the following machine img-svc-bench-01 (148.187.97.94), which is configured with the following specifications:
+
++ CPU(s):              8
++ Thread(s) per core:  1
++ Core(s) per socket:  1
++ Socket(s):           8
++ Memory:              32 **GB**
++ Disk:                40 **GB**
 
 
 
