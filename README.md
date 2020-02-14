@@ -1,5 +1,9 @@
 # bbproject
 
-## First Benchmark - Requesting same chunk 64x64x64 repeatedly
+## Short Description
+
+This repository contains different benchmarks that evaluate the request time of different image chunks from this Swift store
+
+
 
 
