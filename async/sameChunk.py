@@ -1,10 +1,6 @@
-import asyncio
-import concurrent
-import concurrent.futures
 from datetime import datetime
 
 import aiohttp
-import requests
 import random
 import asyncio
 import time
@@ -18,9 +14,10 @@ MAX_CONNECTIONS = 3
 times = []
 
 
-def get_all_objects():
-    all_objects = requests.get(container, params=None)
-    return all_objects.text.splitlines()
+
+async def get_all_objects(session):
+    async with session.get(container) as resp:
+        return await resp.text()
 
 """checks if dimensions of object are 64x64x64
     if not, a random object is selected anew
@@ -50,12 +47,10 @@ def get_ran_object(allObjects):
 async def thread_function(random_object, session):
     start = time.perf_counter()
     response = await session.get(container+random_object)
-    # print(response.status)
     end = time.perf_counter()  # Mark the end of request before the read
     await response.read()
     times.append(end - start)
 
-    # logging.info("Thread %s: finishing", name)
 
 def init_session(connections):
     tcp_connector = aiohttp.TCPConnector(limit=connections)
@@ -73,8 +68,17 @@ def main():
     logging.basicConfig(format=format, level=logging.INFO,
                         datefmt="%H:%M:%S")
 
+    tcp_connector = aiohttp.TCPConnector(limit=MAX_CONNECTIONS)
+    session = aiohttp.ClientSession(connector=tcp_connector)
+    loop = session.connector._loop
 
-    all_objects = get_all_objects()
+    task = [get_all_objects(session)]
+
+    all_objects = loop.run_until_complete(
+        asyncio.gather(*task)
+    )
+    all_objects = all_objects[0].splitlines()
+
     random_object = random.choice(all_objects)
     random_objects = []
     print(random_object)
@@ -87,14 +91,6 @@ def main():
     for i in range(0, nof_retrievals):
         random_objects.append(random_object)
 
-
-    tcp_connector = aiohttp.TCPConnector(limit=MAX_CONNECTIONS)
-    session = aiohttp.ClientSession(connector=tcp_connector)
-    loop = session.connector._loop
-
-
-    # loop.run_until_complete(asyncio.wait_for(init_sessions(loop, connections), None))
-    # session = init_session(loop, 3)
 
     task = [thread_function(ran_object, session)
                   for ran_object in random_objects]
