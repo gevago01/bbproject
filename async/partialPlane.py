@@ -10,7 +10,7 @@ import re
 filename = "experiments/benchmarkPartialPlane.txt"
 container = "https://object.cscs.ch/v1/AUTH_61499a61052f419abad475045aaf88f9/bigbrain/"
 nof_retrievals = 100
-MAX_CONNECTIONS = 24
+MAX_CONNECTIONS = 8
 times = []
 
 
@@ -32,6 +32,7 @@ def valid_object(randomObject):
             return False
 
     return True
+
 
 ''' Returns one random object
 '''
