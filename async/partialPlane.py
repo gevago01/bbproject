@@ -53,10 +53,10 @@ async def retrieve_object(random_object, session):
     times.append(end - start)
 
 
-def init_session(connections):
-    tcp_connector = aiohttp.TCPConnector(limit=connections)
-    session = aiohttp.ClientSession(connector=tcp_connector)
-    return session
+# def init_session(connections):
+#     tcp_connector = aiohttp.TCPConnector(limit=connections)
+#     session = aiohttp.ClientSession(connector=tcp_connector)
+#     return session
 
 
 async def close_sessions(session):
@@ -117,7 +117,8 @@ def main():
         asyncio.gather(*task)
     )
     all_objects = all_objects[0].splitlines()
-
+    print(all_objects)
+    exit(1)
     random_object = get_ran_object(all_objects)
     objects_starting_with = random_object.split("_")[0]
 

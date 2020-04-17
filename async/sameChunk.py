@@ -44,7 +44,7 @@ def get_ran_object(allObjects):
     return random_object
 
 
-async def thread_function(random_object, session):
+async def swift_retrieve(random_object, session):
     start = time.perf_counter()
     response = await session.get(container+random_object)
     end = time.perf_counter()  # Mark the end of request before the read
@@ -52,10 +52,10 @@ async def thread_function(random_object, session):
     times.append(end - start)
 
 
-def init_session(connections):
-    tcp_connector = aiohttp.TCPConnector(limit=connections)
-    session = aiohttp.ClientSession(connector=tcp_connector)
-    return session
+# def init_session(connections):
+#     tcp_connector = aiohttp.TCPConnector(limit=connections)
+#     session = aiohttp.ClientSession(connector=tcp_connector)
+#     return session
 
 
 async def close_sessions(session):
@@ -92,8 +92,8 @@ def main():
         random_objects.append(random_object)
 
 
-    task = [thread_function(ran_object, session)
-                  for ran_object in random_objects]
+    task = [swift_retrieve(ran_object, session)
+            for ran_object in random_objects]
 
     loop.run_until_complete(
         asyncio.wait(task)
